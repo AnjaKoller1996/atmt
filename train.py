@@ -18,7 +18,7 @@ def get_args():
     """ Defines training-specific hyper-parameters. """
     parser = argparse.ArgumentParser('Sequence to Sequence Model')
     parser.add_argument('--cuda', default=False, help='Use a GPU')
-
+    print("Hello World Anja")  # just to test if committing to git repo works
     # Add data arguments
     parser.add_argument('--data', default='baseline/prepared_data', help='path to data directory')
     parser.add_argument('--source-lang', default='de', help='source language')

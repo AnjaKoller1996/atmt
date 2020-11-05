@@ -1,9 +1,11 @@
+import collections
 import os
 import logging
 import argparse
 import numpy as np
 from tqdm import tqdm
 from collections import OrderedDict
+import re
 
 import torch
 import torch.nn as nn
@@ -20,6 +22,7 @@ def get_args():
     parser.add_argument('--cuda', default=False, help='Use a GPU')
     print("Hello World Anja")  # just to test if committing to git repo works
     # Add data arguments
+    # TODO: change the data to use the data outcome of bpe for subword_nmt
     parser.add_argument('--data', default='baseline/prepared_data', help='path to data directory')
     parser.add_argument('--source-lang', default='de', help='source language')
     parser.add_argument('--target-lang', default='en', help='target language')
@@ -28,6 +31,7 @@ def get_args():
     parser.add_argument('--train-on-tiny', action='store_true', help='train model on a tiny dataset')
 
     # Add model arguments
+    # TODO: uses lstm --> with lexical model if implemented
     parser.add_argument('--arch', default='lstm', choices=ARCH_MODEL_REGISTRY.keys(), help='model architecture')
 
     # Add optimization arguments
@@ -40,7 +44,8 @@ def get_args():
     # Add checkpoint arguments
     parser.add_argument('--log-file', default=None, help='path to save logs')
     parser.add_argument('--save-dir', default='checkpoints', help='path to save checkpoints')
-    parser.add_argument('--restore-file', default='checkpoint_last.pt', help='filename to load checkpoint')
+    # parser.add_argument('--restore-file', default='checkpoint_last.pt', help='filename to load checkpoint')
+    parser.add_argument('--restore-file', default='', help='filename to load checkpoint')
     parser.add_argument('--save-interval', type=int, default=1, help='save a checkpoint every N epochs')
     parser.add_argument('--no-save', action='store_true', help='don\'t save models or checkpoints')
     parser.add_argument('--epoch-checkpoints', action='store_true', help='store all epoch checkpoints')

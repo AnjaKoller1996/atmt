@@ -20,9 +20,9 @@ def get_args():
 
     # Add data arguments
     parser.add_argument('--data', default='baseline/prepared_data', help='path to data directory')
-    parser.add_argument('--checkpoint-path', default='checkpoints/checkpoint_best.pt', help='path to the model file')
+    parser.add_argument('--checkpoint-path', default='checkpoints_bpe_subword/checkpoint_best.pt', help='path to the model file')
     parser.add_argument('--batch-size', default=None, type=int, help='maximum number of sentences in a batch')
-    parser.add_argument('--output', default='model_trans_bpe.txt', type=str,
+    parser.add_argument('--output', default='model_translate_bpe.txt', type=str,
                         help='path to the output file destination')
     parser.add_argument('--max-len', default=25, type=int, help='maximum length of generated sequence')
 

@@ -1,5 +1,5 @@
-infile=model_trans_bpe.txt # raw translations as input to sacrebleu
-outfile=model_trans_bpe.out
+infile=model_translate_bpe.txt # raw translations as input to sacrebleu
+outfile=model_translate_bpe.out
 lang=en
 
 cat $infile | perl moses_scripts/detruecase.perl | perl moses_scripts/detokenizer.perl -q -l $lang > $outfile

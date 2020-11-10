@@ -198,7 +198,7 @@ class LSTMDecoder(Seq2SeqDecoder):
                  dropout_out=0.25,
                  pretrained_embedding=None,
                  use_attention=True,
-                 use_lexical_model=True,
+                 use_lexical_model=False,
                  is_cuda=False):
 
         super().__init__(dictionary)
@@ -227,9 +227,9 @@ class LSTMDecoder(Seq2SeqDecoder):
         self.use_lexical_model = use_lexical_model
         if self.use_lexical_model:
             # __LEXICAL: Add parts of decoder architecture corresponding to the LEXICAL MODEL here
-            self.lexical_hidden = nn.Linear(embed_dim, embed_dim, bias=False)
-            self.lex_final = nn.Linear(embed_dim, len(dictionary))
-            # pass  # TODO: remove this here and add comment what every line above does
+            # self.lexical_hidden = nn.Linear(embed_dim, embed_dim, bias=False)
+            # self.lex_final = nn.Linear(embed_dim, len(dictionary))
+            pass  # TODO: remove this here and add comment what every line above does
             # TODO: DONE
 
     def forward(self, tgt_inputs, encoder_out, incremental_state=None):
@@ -296,10 +296,10 @@ class LSTMDecoder(Seq2SeqDecoder):
 
                 if self.use_lexical_model:
                     # __LEXICAL: Compute and collect LEXICAL MODEL context vectors here
-                    step_lex_context = F.tanh(sum(torch.bmm(step_attn_weights.transpose(0, 1).unsqueeze(dim=1), src_embeddings).squeeze(
-                    dim=1)))
-                    lexical_contexts.append(step_lex_context)
-                    # pass  # TODO: remove this here an comment what every line does
+                    # step_lex_context = F.tanh(sum(torch.bmm(step_attn_weights.transpose(0, 1).unsqueeze(dim=1), src_embeddings).squeeze(
+                    # dim=1)))
+                    # lexical_contexts.append(step_lex_context)
+                    pass  # TODO: remove this here an comment what every line does
                     # TODO: DONE
                     # F is the embeddings of the source --> weighted average of source word embeddings
                     # f = tanh(sum(a * f) where a is the attention weight and f the source embedding
@@ -322,10 +322,10 @@ class LSTMDecoder(Seq2SeqDecoder):
 
         if self.use_lexical_model:
             # __LEXICAL: Incorporate the LEXICAL MODEL into the prediction of target tokens here
-            lex_hid_out = torch.cat(lexical_contexts, dim=0).view(tgt_time_steps, self.embed_dim)
-            lex_out = F.tanh(self.lexical_hidden(lex_hid_out)) + lex_hid_out
-            decoder_output = decoder_output + self.lex_final(lex_out)
-            # pass  # TODO: remove this here and comment above what each line does
+            # lex_hid_out = torch.cat(lexical_contexts, dim=0).view(tgt_time_steps, self.embed_dim)
+            # lex_out = F.tanh(self.lexical_hidden(lex_hid_out)) + lex_hid_out
+            # decoder_output = decoder_output + self.lex_final(lex_out)
+            pass  # TODO: remove this here and comment above what each line does
             # TODO:DONE
 
         return decoder_output, attn_weights

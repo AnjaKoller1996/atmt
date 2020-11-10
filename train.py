@@ -43,7 +43,7 @@ def get_args():
 
     # Add checkpoint arguments
     parser.add_argument('--log-file', default=None, help='path to save logs')
-    parser.add_argument('--save-dir', default='checkpoints', help='path to save checkpoints')
+    parser.add_argument('--save-dir', default='checkpoints_bpe_subword', help='path to save checkpoints')
     # parser.add_argument('--restore-file', default='checkpoint_last.pt', help='filename to load checkpoint')
     parser.add_argument('--restore-file', default='', help='filename to load checkpoint')
     parser.add_argument('--save-interval', type=int, default=1, help='save a checkpoint every N epochs')
